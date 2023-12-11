@@ -9,6 +9,7 @@ class Node:
 
 #This is a class for the Linked list. It stores the methods that give the LL its functionality
 class LinkedList:
+    
     def __init__(self, nodes = None):
         self.head = None
 
@@ -106,18 +107,36 @@ class LinkedList:
 
             currentNode = currentNode.next
         
-    
-    def replace(self, target_node, new_node):
-        newNode = Node(new_node)
+    #To remove an element based on the index of it in the list
+    def remove(self, index):
         currentNode = self.head
+        count_del = 0
+        count_prev = 0
+
+        prev_node_index = index - 1
+
+        del_node = None
+        prev_node = None
 
         while currentNode.next is not None:
-
-            if currentNode.data == target_node:
-                currentNode = newNode
-                newNode.next = currentNode.next
+            if count_del == index:
+                print('del if')
+                del_node = currentNode
             
+            count_del += 1
             currentNode = currentNode.next
+        
+        currentNode = self.head
+        
+        while currentNode.next is not None:
+            if count_prev == prev_node_index:
+                print('prev if')
+                prev_node = currentNode
+            
+            count_prev += 1
+            currentNode = currentNode.next
+
+        prev_node.next = del_node.next
 
     
 
@@ -141,6 +160,5 @@ LL.add_end('H')
 LL.add_between('c','d','z')
 
 LL.get_index('a')
-LL.replace('a','I')
 
 print(LL)
